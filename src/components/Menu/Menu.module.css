@@ -1,0 +1,47 @@
+.menu{
+ display: flex;
+ flex-direction:column;   
+ padding: 25px;
+}
+.form_search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:relative
+}
+.svg_search{
+    fill:  #C4C4C4;
+    position: absolute;
+bottom: 24.5px;
+left: 35px;
+
+}
+.input_search{
+    box-shadow: none;
+    outline: none;
+    height: 11px;
+    max-height: 60px;
+    border: 3px solid #C4C4C4;
+    border-radius: 3px;
+    padding: 25px 0 25px 75px;
+    font-family: Mont;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20.45px;
+    text-align: left;
+
+}
+.menu_title{
+    font-family: Mont;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 25.56px;
+    text-align: left;
+    padding-top: 30px;
+}
+.searchMenuSVG{
+    position: absolute;
+    left: 40px;
+    width: 22px;
+    height: 22px;
+}
