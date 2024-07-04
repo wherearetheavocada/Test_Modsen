@@ -30,10 +30,8 @@ export default function Panel() {
         </div>
         </Link>
         <Link to='/profile'>
-            <div className='panal_profile'>
-                <div className='profile'>
-                <img className={`${styles.profilePng}`} src="/icons/profile.png" alt="18+"></img>
-                </div>
+            <div className={`${styles.panal_profile}`}>
+                <img className={`${styles.profilePng}`} src="/icons/profile.png" alt="profile"></img>
             </div>
         </Link>
     </div>

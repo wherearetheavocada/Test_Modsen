@@ -1,21 +1,14 @@
 import {Redirect} from 'react-router-dom';
-import {useDispatch} from 'react-redux'
 import { useAuth } from '../hooks/use-auth';
-import {removeUser} from '../store/slices/userSlice'
+import Profile from '../components/Profile/Profile';
 
 export default function ProfilePage() {
-    const dispatch = useDispatch();
+
 
     const {isAuth, email} = useAuth();
 
     return isAuth ? (
-        <div>
-            <h1>Welcome</h1>
-
-            <button
-                onClick={()=> dispatch(removeUser())}
-            >Log out from {email}</button>
-        </div>
+        <Profile  email={email}/>
     ) : (
         <Redirect to="/login" />
     )
