@@ -4,7 +4,6 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import ors from 'openrouteservice-js';
 import style from './Map.module.css'
-
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -216,7 +215,7 @@ const SearchCity = ({ setCenter, setMarkerPosition, setDestination }) => {
   );
 };
 
-const LocationUpdater = ({ setCenter, setMarkerPosition, setRadius, setOrigin }) => {
+const LocationUpdater = ({ setCenter, setMarkerPosition, setMeter, setOrigin }) => {
   const map = useMap();
 
   useEffect(() => {
@@ -226,7 +225,7 @@ const LocationUpdater = ({ setCenter, setMarkerPosition, setRadius, setOrigin })
         const userPosition = [latitude, longitude];
         setCenter(userPosition);
         setMarkerPosition(userPosition);
-        setRadius(1000); // Устанавливаем радиус в 1000 метров
+        setMeter(1000); // Устанавливаем радиус в 1000 метров
         setOrigin([longitude, latitude]); // Устанавливаем координаты текущего местоположения
         map.setView(userPosition, 18);
       },
@@ -236,20 +235,20 @@ const LocationUpdater = ({ setCenter, setMarkerPosition, setRadius, setOrigin })
         const defaultPosition = [55.7558, 37.6173]; // Москва по умолчанию
         setCenter(defaultPosition);
         setMarkerPosition(defaultPosition);
-        setRadius(1000); // Устанавливаем радиус в 1000 метров
+        setMeter(1000); // Устанавливаем радиус в 1000 метров
         setOrigin([37.6173, 55.7558]); // Устанавливаем координаты текущего местоположения
         map.setView(defaultPosition, 18);
       }
     );
-  }, [map, setCenter, setMarkerPosition, setRadius, setOrigin]);
+  }, [map, setCenter, setMarkerPosition, setMeter, setOrigin]);
 
   return null;
 };
 
-const Map = () => {
+const Map = ({meter, setMeter}) => {
   const [center, setCenter] = useState([55.7558, 37.6173]); // Default to Moscow
   const [markerPosition, setMarkerPosition] = useState(null);
-  const [radius, setRadius] = useState(null);
+  // const [radius, setRadius] = useState(null);
   const [origin, setOrigin] = useState(null);
   const [destination, setDestination] = useState(null);
   const [route, setRoute] = useState(null);
@@ -283,16 +282,16 @@ const Map = () => {
   }, [origin, destination]);
 
   useEffect(() => {
-    if (markerPosition && radius) {
-      fetchAttractions(markerPosition, radius);
+    if (markerPosition && meter) {
+      fetchAttractions(markerPosition, meter);
     }
-  }, [markerPosition, radius]);
+  }, [markerPosition, meter]);
 
-  const fetchAttractions = async (position, radius) => {
+  const fetchAttractions = async (position, meter) => {
     try {
       const apiKey = '5ae2e3f221c38a28845f05b624720726f5cc6331fa273a907cdf68a7'; 
       const [latitude, longitude] = position;
-      const response = await fetch(`https://api.opentripmap.com/0.1/en/places/radius?radius=${radius}&lon=${longitude}&lat=${latitude}&apikey=${apiKey}`);
+      const response = await fetch(`https://api.opentripmap.com/0.1/en/places/radius?radius=${meter}&lon=${longitude}&lat=${latitude}&apikey=${apiKey}`);
       const data = await response.json();
       const attractionsData = await Promise.all(data.features.map(async feature => {
         const wikidataId = feature.properties.wikidata; 
@@ -353,8 +352,8 @@ const Map = () => {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
         <MyLocationMarker position={markerPosition} />
-        {markerPosition && radius && (
-          <Circle center={markerPosition} radius={radius} />
+        {markerPosition && meter && (
+          <Circle center={markerPosition} radius={meter} />
         )}
         {route && (
           <Polyline positions={route} color="blue" />
@@ -369,7 +368,7 @@ const Map = () => {
             </Popup>
           </Marker>
         ))}
-        <LocationUpdater setCenter={setCenter} setMarkerPosition={setMarkerPosition} setRadius={setRadius} setOrigin={setOrigin} />
+        <LocationUpdater setCenter={setCenter} setMarkerPosition={setMarkerPosition} setMeter={setMeter} setOrigin={setOrigin} />
       </MapContainer>
     </div>
   );

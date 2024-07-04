@@ -1,0 +1,67 @@
+.formPage{
+    width: 1200px;
+    margin: 0 auto;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.formTitle{
+    margin-top: 32px;
+    color: black;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 80px;
+    text-align: left;
+}
+.formRegister{
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+    text-decoration: none;
+    gap: 5px;
+}
+.formForm{
+    border: 3px solid #c4c4c4;
+    margin-top: 72px;
+    width: 624px;
+    height: 400px;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:40px;
+}
+.formInput{
+    width: 544px;
+    height: 56px;
+    padding-left: 20px;
+    font-family: Mont;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 25.56px;
+    background-color: #ffffff;
+    border: 1px solid #c4c4c4;
+    outline:none
+}
+.formBtn{
+    height: 56px;
+    width: 400px;
+    background: #000000;
+    font-family: Mont;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #ffffff;
+    border: none;
+}
+a{
+    outline: none;
+}

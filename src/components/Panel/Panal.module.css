@@ -49,4 +49,7 @@
 .favoritesSVG{
     width: 18px;
     height: 24px;
+}.panal_profile{
+    position: absolute;
+    bottom: -210px;
 }
